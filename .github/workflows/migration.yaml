@@ -1,0 +1,18 @@
+name: migration
+
+on:
+  push:
+    paths:
+      - db/**
+      - .github/workflows/migration.yaml
+jobs:
+  migration:
+    runs-on: ubuntu-20.04
+    container:
+      image: golang:1.17-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          apk update && apk add postgresql-client
+
